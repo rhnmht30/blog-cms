@@ -4,7 +4,6 @@ import path from "path";
 const root = process.cwd();
 
 export default (req, res) => {
-	console.log(req.headers.origin);
 	if (req.method !== "GET")
 		return res
 			.status(405)

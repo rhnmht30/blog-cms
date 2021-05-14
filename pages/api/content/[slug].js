@@ -1,10 +1,10 @@
 import fs from "fs";
 import path from "path";
+import matter from "gray-matter";
 
 const root = process.cwd();
 
 export default (req, res) => {
-	console.log(req.headers.origin);
 	if (req.method !== "GET")
 		return res
 			.status(405)
@@ -21,7 +21,10 @@ export default (req, res) => {
 			path.join(root, "data", type, `${slug}.mdx`),
 			"utf8"
 		);
-		return res.status(200).json({ message: "success", file });
+		const { data, content } = matter(file);
+		return res
+			.status(200)
+			.json({ message: "success", post: { content, data } });
 	} catch (error) {
 		return res.status(400).json({ message: "error", error });
 	}
