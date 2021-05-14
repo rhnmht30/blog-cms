@@ -4,6 +4,7 @@ import path from "path";
 const root = process.cwd();
 
 export default (req, res) => {
+	console.log(req.headers.origin);
 	if (req.method !== "GET")
 		return res
 			.status(405)
@@ -16,7 +17,6 @@ export default (req, res) => {
 			.json({ message: "Please provide the type of content" });
 
 	try {
-		console.log(root);
 		const file = fs.readFileSync(
 			path.join(root, "data", type, `${slug}.mdx`),
 			"utf8"
