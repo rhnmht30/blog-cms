@@ -45,7 +45,6 @@ export default function Home({ blogs, projects }) {
 							) : null}
 						</li>
 					))}
-					<li>asd</li>
 				</ul>
 				<h2>Projects</h2>
 				<ul>
