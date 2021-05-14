@@ -19,8 +19,6 @@ export default (req, res) => {
 		const files = fs.readdirSync(path.join(root, "data", type));
 		return res.status(200).json({ message: "success", files });
 	} catch (error) {
-		return res
-			.status(404)
-			.json({ message: "No content found for the given type" });
+		return res.status(400).json({ message: "error", error });
 	}
 };

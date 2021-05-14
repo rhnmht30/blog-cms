@@ -22,8 +22,6 @@ export default (req, res) => {
 		);
 		return res.status(200).json({ message: "success", file });
 	} catch (error) {
-		return res
-			.status(404)
-			.json({ message: "No content found for the given type and slug" });
+		return res.status(400).json({ message: "error", error });
 	}
 };
