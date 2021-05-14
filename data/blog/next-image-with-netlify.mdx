@@ -1,5 +1,6 @@
 ---
 title: "Using Next.js Image Component with Netlify"
+slug: "next-image-with-netlify"
 publishedAt: "2021/01/29"
 updatedAt: "2021/01/29"
 createdAt: "2021/01/24 13:30"
@@ -90,19 +91,19 @@ The above code is rendered as.
 
 The image URL was changed from `/boop.jpg` to `/_next/image?url=%2Fboop.jpg&w=750&q=75`.
 
--   `/_next/image` — this is an endpoint where the image will be sent for processing.
--   `?url=/boop.jpg` — where the endpoint should load the image from.
--   `&w=750` — resize the image to 750px wide.
--   `&q=75` — resample the image at 75% quality to reduce the file size.
+- `/_next/image` — this is an endpoint where the image will be sent for processing.
+- `?url=/boop.jpg` — where the endpoint should load the image from.
+- `&w=750` — resize the image to 750px wide.
+- `&q=75` — resample the image at 75% quality to reduce the file size.
 
 This proxy URL is unique and thus can be cached, preventing redundant image optimizations. The default loader relies on the Image Optimisation API, which is unavailable for exported-applications, for Next.js tunes images on-demand, as users request them (not at build time).
 
 Here, we have a list of solutions at hand, that is to
 
--   use `next start`, which starts the Image Optimisation API. This would need a physical or cloud server, rendering you responsible for its management and monitoring.
--   use Vercel for deploying, which supports Image Optimisation.
--   use the solution provided by the `next-on-netlify` package.
--   configure a third-party loader in `next.config.js`. (e.g., Cloudinary, Akamai and so forth)
+- use `next start`, which starts the Image Optimisation API. This would need a physical or cloud server, rendering you responsible for its management and monitoring.
+- use Vercel for deploying, which supports Image Optimisation.
+- use the solution provided by the `next-on-netlify` package.
+- configure a third-party loader in `next.config.js`. (e.g., Cloudinary, Akamai and so forth)
 
 For this tutorial, the last two solutions will suffice us. We shall make use of a simple Image Optimiser provided to us by the package `next-on-netlify` ([originally demonstrated by Jason](https://github.com/jlengstorf/next-image-on-netlify) 🙏) which uses [`jimp`](https://www.npmjs.com/package/jimp) under the hood. But that is just a plain API, not performant enough as against the one provided by Vercel. Therefore, we will apply Cloudinary as the default loader, being compatible with Netlify and other hosting platforms.
 
@@ -174,7 +175,7 @@ Now the call is to build our Next.js app as a serverless app. Just create a `nex
 
 module.exports = {
 	// Target must be serverless
-	target: "serverless"
+	target: "serverless",
 };
 ```
 
@@ -258,8 +259,8 @@ After finishing the sign-up process, note down your cloud name as shown in the i
 
 Now, to use our images with Cloudinary, we have two options, either to
 
--   upload all our images to Cloudinary, and use `https://res.cloudinary.com/CLOUD_NAME/image/upload/IMAGE_NAME.jpg` to fetch it
--   or provide absolute URL of the image hosted on the platform of our choice to Cloudinary like `https://res.cloudinary.com/CLOUD_NAME/image/fetch/https://YOUR_PROVIDER.com/IMAGE_NAME.jpg`
+- upload all our images to Cloudinary, and use `https://res.cloudinary.com/CLOUD_NAME/image/upload/IMAGE_NAME.jpg` to fetch it
+- or provide absolute URL of the image hosted on the platform of our choice to Cloudinary like `https://res.cloudinary.com/CLOUD_NAME/image/fetch/https://YOUR_PROVIDER.com/IMAGE_NAME.jpg`
 
 > If you get 404 errors on fetching images the second way, log into your cloudinary account, goto **settings** -> **security** and un-check the **Fetched URL** checkbox under **Restricted media types** option. It allows us to use any image URL. To prevent misuse, provide the list of accepted domains under the **Allowed fetch domains** option.
 
@@ -281,7 +282,7 @@ const myLoader = ({ src, width, quality }) => {
 		quality || 75
 	}/${src}`;
 };
-const MyImage = props => {
+const MyImage = (props) => {
 	return <Image loader={myLoader} {...props} />;
 };
 
@@ -335,9 +336,9 @@ Now you know the two ways to function the Next.js Image Component with Netlify. 
 
 In my [deployed demo](https://next-with.netlify.app/), I have used the most performant one. But you can check these deploy URLs and respective PRs to get an understanding.
 
--   Using `next-on-netlify`: [PR(#1)](https://github.com/rhnmht30/next-on-netlify-demo/pull/1) and [deploy preview](https://deploy-preview-1--next-with.netlify.app/).
--   Using custom loader prop: [PR(#2)](https://github.com/rhnmht30/next-on-netlify-demo/pull/2) and [deploy preview](https://deploy-preview-2--next-with.netlify.app/).
--   Using Cloudinary as default loader: [PR(#3)](https://github.com/rhnmht30/next-on-netlify-demo/pull/3) and [deploy preview](https://deploy-preview-3--next-with.netlify.app/).
+- Using `next-on-netlify`: [PR(#1)](https://github.com/rhnmht30/next-on-netlify-demo/pull/1) and [deploy preview](https://deploy-preview-1--next-with.netlify.app/).
+- Using custom loader prop: [PR(#2)](https://github.com/rhnmht30/next-on-netlify-demo/pull/2) and [deploy preview](https://deploy-preview-2--next-with.netlify.app/).
+- Using Cloudinary as default loader: [PR(#3)](https://github.com/rhnmht30/next-on-netlify-demo/pull/3) and [deploy preview](https://deploy-preview-3--next-with.netlify.app/).
 
 In search of more examples? Check out [my PR on this repo](https://github.com/dsckiet/website/pull/33) where I am converting my community’s website, deployed on Netlify, to use Next 10 and Tailwind CSS.
 
