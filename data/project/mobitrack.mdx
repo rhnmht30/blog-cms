@@ -1,0 +1,122 @@
+---
+title: "Mobi-Track"
+publishedAt: "2020/02/14"
+createdAt: "2020/12/30 10:00"
+summary: "Use location on your mobile services while staying offline!"
+image: "/images/mobitrack/cover.jpg"
+githubUrl: "https://github.com/rhnmht30/hack-vsit-2020"
+---
+
+<figure>
+	<div className="flex shadow-lg">
+		<Image
+			className="rounded"
+			alt={`MobiTrack showcase`}
+			src={`/images/mobitrack/showcase.jpg`}
+			width={1080}
+			height={720}
+		/>
+	</div>
+	<figcaption>MobiTrack Screens</figcaption>
+</figure>
+
+Mobi-Track is a project that my team and I worked on during a 24-hour hackathon. It is an android app that uses your phone’s GPS and SMS to find your location, other's location and places around you, even when you lack an internet connection.
+
+## Project Goal
+
+Internet shutdowns have become a vital threat to one’s routine activities. You must have heard about cases where the government bars internet services given security concerns. But it affects people who just want to use the internet for day-to-day activities like finding routes or places on a map.
+
+Besides the internet shutdown in India, there remains poor internet connectivity in villages and even cities! It becomes absurd to a point where even browsing is hopeless.
+
+Hence, our goal was to create an android app that worked entirely offline to perform location-based features via SMS.
+
+We have a server that uses MapMyIndia’s API to search the queried location coming through the SMS in our server. We used the Twilio SMS API to send/receive the SMS.
+
+The features of our app include
+
+-   locating the current address of the user without internet
+-   locating hospitals/police stations, etc. around a user’s location
+-   broadcasting a user’s location to friends or family with just a click
+-   finding your phone remotely by sending an SMS to it
+
+<div className="flex space-x-1 justify-center items-center">
+	<figure>
+		<div className="flex rounded shadow-lg">
+			<Image
+				className="rounded"
+				alt={`Main screen`}
+				src={`/images/mobitrack/homescreen.jpg`}
+				width={525}
+				height={920}
+			/>
+		</div>
+		<figcaption>Main Screen</figcaption>
+	</figure>
+	<figure>
+		<div className="flex shadow-lg">
+			<Image
+				className="rounded"
+				alt={`Tracked Location`}
+				src={`/images/mobitrack/tracked-location.jpg`}
+				width={523}
+				height={920}
+			/>
+		</div>
+		<figcaption>Tracked Location</figcaption>
+	</figure>
+</div>
+
+<div className="flex space-x-1 justify-center items-center">
+	<figure>
+		<div className="flex rounded shadow-lg">
+			<Image
+				className="rounded"
+				alt={`Find Places Nearby`}
+				src={`/images/mobitrack/nearby.jpg`}
+				width={520}
+				height={920}
+			/>
+		</div>
+		<figcaption>Locate Places Nearby</figcaption>
+	</figure>
+	<figure>
+		<div className="flex rounded shadow-lg">
+			<Image
+				className="rounded"
+				alt={`screen for broadcast`}
+				src={`/images/mobitrack/broadcast.jpg`}
+				width={525}
+				height={920}
+			/>
+		</div>
+		<figcaption>Broadcast your location</figcaption>
+	</figure>
+</div>
+
+## Tech Stack Explanation and My Role
+
+We used Node.js and Express.js for the backend and mongo-db for the database. The client-side of this project was an android app built using Kotlin. We also utilised the Twilio SMS API and MapMyIndia APIs.
+
+I was to create an API layer between the Twilio SMS service and the android client. Whenever a user’s phone sent an SMS to the number provided by Twilio, a webhook got fired in our Twilio account to our server. It parsed the requested service and then demanded MapMyIndia for the location data, which the Twilio’s API cleaned up and returned to the user’s phone as SMS.
+
+Responses from the server varied by the type of request (e.g., returning proper address when inputted random location data, a list of hospitals when asked for nearby hospitals, etc.).
+
+## Problems and Thought Process
+
+The TRAI regulations in India let organisations deliver messages between 9 a.m. and 9 a.m. (local IST). Although our complete solution hung on it, we could not test the SMS features in the backend, using the Twilio API.
+
+We manually tested the API and were fetching GPS data from the phone when offline with success. However, we weren’t able to send messages to API as it had international numbers.
+
+## Lessons Learned
+
+This project schooled me on persistence and patience. During the 24-hour hackathon, our team failed to hatch a problem to solve. We had spent almost ten-hours drinking coffee and exchanging views. At last, when we reached something workable, we instantly jumped onto wireframes, completing the app within six hours of constant work. That our solution ranked Top 10 among 250 teams lifted our spirits up. (Never lose hope!)
+
+## Future
+
+During the hackathon, we couldn’t put Twilio API to use as we had planned it. I’d be using some other tool to resolve this so that the app works again.
+
+## Live Demo
+
+As this was an android app, a live demo is unavailable. But you can [check out the code here](https://github.com/rhnmht30/hack-vsit-2020).
+
+<hr />

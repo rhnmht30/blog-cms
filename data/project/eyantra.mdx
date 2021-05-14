@@ -1,0 +1,117 @@
+---
+title: "e-yantra"
+publishedAt: "2020/01/26"
+createdAt: "2020/12/30 8:00"
+summary: "Small task-based projects made during a competition"
+image: "/images/eyantra/cover.jpg"
+githubUrl: "https://github.com/rhnmht30/e-yantra"
+---
+
+IIT Bombay conducts an annual competition, [e-Yantra](https://www.e-yantra.org/) Robotics Competition (e-YRC), where they give the selected teams a robotic kit, replete with accessories and video tutorials. The kit supports them to grasp basic concepts in embedded systems and microcontroller programming. Using them, the selected teams then implement abstracts of real-world problems assigned as ‘themes.’
+
+The competition had several tasks to complete, and failing a few should cause elimination.
+
+My role was to help our team qualify the rounds that involved coding.
+
+## Task 1
+
+I had to calculate the shortest path in the maze's image, using the BFS algorithm and plotting it with suitable libraries in python.
+
+<figure>
+	<div className="flex justify-center">
+		<Image
+			className="rounded"
+			alt={`A sample maze image`}
+			src={`/images/eyantra/maze.jpg`}
+			width={200}
+			height={200}
+		/>
+	</div>
+	<figcaption>A sample maze image.</figcaption>
+</figure>
+
+They had provided an image of a maze to compute and trace the shortest path. I assigned each block in the maze a coordinate and then calculated all the neighbours to create a tree. Using a custom queue class in python, I implemented BFS to traverse the tree from the start to the endpoint. I also kept the values of the parent of a travelled block. This enabled me to retrace the path if I reached the end.
+
+At last, I had to print the array of coordinates of the shortest path, and also paint those coordinate grey in the maze image. For processing it, I used open cv. You can find the [code implementation here](https://github.com/rhnmht30/e-yantra/blob/master/task1%23rr/2.%20Practice/Task%201A/codes).
+
+<figure>
+	<div className="flex justify-center">
+		<Image
+			className="rounded"
+			alt={`Task 1`}
+			src={`/images/eyantra/task1.gif`}
+			width={600}
+			height={337}
+		/>
+	</div>
+	<figcaption>A GIF showing task 1 working.</figcaption>
+</figure>
+
+## Task 2
+
+Now, I had to make a socket server in C to output dynamic obstacles (as coordinates in the maze) into the python program and re-calculate the shortest path.
+
+<figure>
+	<div className="flex justify-center">
+		<Image
+			className="rounded"
+			alt={`Task 2`}
+			src={`/images/eyantra/task2.gif`}
+			width={600}
+			height={337}
+		/>
+	</div>
+	<figcaption>A GIF showing task 2 working.</figcaption>
+</figure>
+
+This GIF shows a socket connection between the C server (left) and the python client (right). In the C server, it required me to open a socket connection, joining the client to read the content in a file. The file includes the list of coordinates to send to the client as obstacles. When the server sends an obstacle to the client, it has to wait for its response as it provides the new shortest path. This process goes on till the server has no obstacles left, after which it closes the socket connection. You can find the [code implementation here](https://github.com/rhnmht30/e-yantra/tree/master/task1%23rr/2.%20Practice/Task%201B/codes).
+
+## Task 3
+
+Further, I had to extract all the numbers along the shortest path in the maze’s image.
+
+<figure>
+	<div className="flex justify-center">
+		<Image
+			className="rounded"
+			alt={`Numbers in a maze`}
+			src={`/images/eyantra/number-in-maze.jpg`}
+			width={400}
+			height={400}
+		/>
+	</div>
+	<figcaption>Given numbers to be extracted from the maze.</figcaption>
+</figure>
+
+With my team members’ help, I understood the basics of training a machine learning model to predict the number in an image. We used the famous MNIST dataset, and our model had an accuracy of 88%. You can find the [code implementation here](https://github.com/rhnmht30/e-yantra/tree/master/task1%23rr/2.%20Practice/Task%201C/codes).
+
+<figure>
+	<div className="flex justify-center">
+		<Image
+			className="rounded"
+			alt={`Task 3`}
+			src={`/images/eyantra/task3.gif`}
+			width={600}
+			height={337}
+		/>
+	</div>
+	<figcaption>A GIF showing task 3 results.</figcaption>
+</figure>
+
+## Problems and Thought Process
+
+During the first task, implementing BFS for a 2D dimensional system puzzled me. For it, I had watched several videos and hacked around for a week to come up with a solution. My initial thought process focused on carrying out the algorithm for a linear array and thinking for the 2D system.
+
+As it was beyond our scope, they provided lots of server code to us for the second task. But executing the socket server in C was challenging. It expected us to write a lot of code to open and close a server. This makes me wonder about how many levels of abstraction exists in those modern libraries we use today.
+
+The third task was time-taking and quite complex, mainly because I had no prior experience with machine learning. But I achieved the not-so-bad results. My model recognised most of the images, slightly better than no images at all.
+
+## Lessons Learned
+
+Although I lack experience working with python as my primary language, I use it to scarp or automate stuff. But during the project, I deep-dived, using python in a way I had never done. I am satisfied taking part in a national-level competition, giving ample exposure and unlocking my hidden side. It taught me to have faith in the process.
+
+## Conclusion
+
+We excelled through the coding rounds. But we could not move forward with hardware round, as none of us had worked with hardware before. [This GitHub repo](https://github.com/rhnmht30/e-yantra) contains all the tasks with their problem statements. Check them out if you want to try.
+
+<hr />
