@@ -38,7 +38,7 @@ export default function Home({ blogs, projects }) {
 								<a
 									className={styles.link}
 									target="_blank"
-									href={`https://rhnmht30.dev/api/preview?secret=${secret}&type=blog&slug=${b}`}
+									href={`https://dev-estate-git-use-isr-rhnmht30.vercel.app/api/preview?secret=${secret}&type=blog&slug=${b}`}
 								>
 									preview
 								</a>
@@ -56,7 +56,7 @@ export default function Home({ blogs, projects }) {
 								<a
 									className={styles.link}
 									target="_blank"
-									href={`https://rhnmht30.dev/api/preview?secret=${secret}&type=project&slug=${p}`}
+									href={`https://dev-estate-git-use-isr-rhnmht30.vercel.app/api/preview?secret=${secret}&type=project&slug=${p}`}
 								>
 									preview
 								</a>
