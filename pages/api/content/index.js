@@ -16,6 +16,7 @@ export default (req, res) => {
 			.json({ message: "Please provide the type of content" });
 
 	try {
+		console.log(root);
 		const files = fs.readdirSync(path.join(root, "data", type));
 		return res.status(200).json({ message: "success", files });
 	} catch (error) {
