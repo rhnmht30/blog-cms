@@ -19,6 +19,9 @@ export default (req, res) => {
 		const files = fs.readdirSync(path.join(root, "data", type));
 		return res.status(200).json({ message: "success", files });
 	} catch (error) {
-		return res.status(400).json({ message: "error", error });
+		return res.status(404).json({
+			message: "Error opening directory, please check the file type",
+			error,
+		});
 	}
 };
