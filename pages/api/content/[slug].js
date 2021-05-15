@@ -26,6 +26,9 @@ export default (req, res) => {
 			.status(200)
 			.json({ message: "success", post: { content, data } });
 	} catch (error) {
-		return res.status(400).json({ message: "error", error });
+		return res.status(404).json({
+			message: "Error opening file, please check the file type and slug",
+			error,
+		});
 	}
 };
