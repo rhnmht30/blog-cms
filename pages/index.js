@@ -55,7 +55,7 @@ export default function Home({ blogs, projects }) {
                 <a
                   className={styles.link}
                   target="_blank"
-                  href={`https://rhnmht30.dev/api/preview?secret=${secret}&type=project&slug=${p}`}
+                  href={`https://rhnmht30.dev/api/preview?secret=${secret}&type=projects&slug=${p}`}
                 >
                   preview
                 </a>
